@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyApp Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Navbar Styles */
+        .lux-navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 15px 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lux-navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .lux-navbar-brand {
+            font-weight: 700;
+            font-size: 24px;
+            color: #1e3c72 !important;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .lux-navbar-brand i {
+            margin-right: 10px;
+            font-size: 26px;
+        }
+
+        /* Dashboard Content */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 25px;
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .welcome-section {
+            margin-bottom: 35px;
+        }
+
+        .welcome-title {
+            color: #1e3c72;
+            font-weight: 700;
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .welcome-subtitle {
+            color: #2a5298;
+            font-size: 16px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #1e3c72;
+            font-weight: 600;
+            font-size: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            font-size: 22px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(42, 82, 152, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .stat-item:nth-child(1) .stat-icon {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+        }
+
+        .stat-item:nth-child(2) .stat-icon {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .stat-item:nth-child(3) .stat-icon {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .stat-item:nth-child(4) .stat-icon {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+
+        .stat-value {
+            color: #1e3c72;
+            font-weight: 700;
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #2a5298;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .stat-change {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .stat-change.positive {
+            color: #2ecc71;
+        }
+
+        .stat-change.negative {
+            color: #e74c3c;
+        }
+
+        .stat-change i {
+            margin-right: 5px;
+        }
+
+        /* Recent Activity */
+        .activity-section {
+            margin-bottom: 40px;
+        }
+
+        .activity-list {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(42, 82, 152, 0.1);
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(42, 82, 152, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item:hover {
+            background: rgba(30, 60, 114, 0.03);
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 16px;
+        }
+
+        .activity-icon.student {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+        }
+
+        .activity-icon.faculty {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .activity-icon.report {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .activity-details {
+            flex: 1;
+        }
+
+        .activity-title {
+            color: #1e3c72;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .activity-time {
+            color: #2a5298;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            height: fit-content;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .quick-actions {
+            margin-bottom: 30px;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(42, 82, 152, 0.2);
+            border-radius: 12px;
+            padding: 15px 20px;
+            color: #2a5298;
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .action-btn:hover {
+            background: rgba(30, 60, 114, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .action-btn i {
+            margin-right: 12px;
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .progress-section {
+            margin-top: 30px;
+        }
+
+        .progress-item {
+            margin-bottom: 20px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .progress-label {
+            color: #1e3c72;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .progress-value {
+            color: #2a5298;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(42, 82, 152, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .progress-fill.students {
+            width: 75%;
+            background: linear-gradient(90deg, #1e3c72, #2a5298);
+        }
+
+        .progress-fill.faculty {
+            width: 60%;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+        }
+
+        .progress-fill.reports {
+            width: 85%;
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content, .sidebar {
+                padding: 30px 25px;
+            }
+            
+            .welcome-title {
+                font-size: 28px;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content, .sidebar {
+                padding: 25px 20px;
+            }
+            
+            .welcome-title {
+                font-size: 24px;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-item {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <!-- <nav class="lux-navbar">
+            <a class="lux-navbar-brand" href="#">
+                <i class="fas fa-graduation-cap"></i> MyApp
+            </a>
+        </nav> -->
+        <app-navbar></app-navbar>
+        <!-- Dashboard Content -->
+        <div class="dashboard">
+            <!-- Main Content -->
+            <div class="content">
+                <!-- Welcome Section -->
+                <div class="welcome-section">
+                    <h1 class="welcome-title">Welcome to ReportApp </h1>
+                    <!-- <p class="welcome-subtitle">
+                        This is a modern, responsive dashboard with a beautiful navigation bar. 
+                        Manage your students, faculty, and reports efficiently with our intuitive interface.
+                    </p> -->
+                </div>
+
+                <!-- Stats Section -->
+                <div class="stats-section">
+                    <h2 class="section-title"><i class="fas fa-chart-bar"></i> Overview</h2>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div class="stat-value">1,254</div>
+                            <div class="stat-label">Students</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> 12% from last month
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="stat-value">84</div>
+                            <div class="stat-label">Faculty</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> 5% from last month
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="stat-value">562</div>
+                            <div class="stat-label">Reports</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> 23% from last month
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-value">96%</div>
+                            <div class="stat-label">Success Rate</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> 3% from last month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="activity-section">
+                    <h2 class="section-title"><i class="fas fa-history"></i> Recent Activity</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon student">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="activity-details">
+                                <div class="activity-title">New student registered</div>
+                                <div class="activity-time">10 minutes ago</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon faculty">
+                                <i class="fas fa-user-edit"></i>
+                            </div>
+                            <div class="activity-details">
+                                <div class="activity-title">Faculty profile updated</div>
+                                <div class="activity-time">45 minutes ago</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon report">
+                                <i class="fas fa-file-medical"></i>
+                            </div>
+                            <div class="activity-details">
+                                <div class="activity-title">New report generated</div>
+                                <div class="activity-time">2 hours ago</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon student">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div class="activity-details">
+                                <div class="activity-title">Student progress updated</div>
+                                <div class="activity-time">5 hours ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2 class="section-title"><i class="fas fa-bolt"></i> Quick Actions</h2>
+                    <div class="action-buttons">
+                        <button class="action-btn" routerLink="/addstudent">
+                            <i class="fas fa-user-plus"></i> Add Student
+                        </button>
+                        <button class="action-btn" routerLink="/students">
+                            <i class="fas fa-chalkboard-teacher"></i> student list
+                        </button>
+                        <button class="action-btn" routerLink="/students">
+                            <i class="fas fa-file-alt"></i> Generate Report
+                        </button>
+                        <button class="action-btn">
+                            <i class="fas fa-chart-pie"></i> View Analytics
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Progress Section -->
+                <div class="progress-section">
+                    <h2 class="section-title"><i class="fas fa-tasks"></i> Progress</h2>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="progress-label">Student Registration</span>
+                            <span class="progress-value">75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill students"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="progress-label">Faculty Onboarding</span>
+                            <span class="progress-value">60%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill faculty"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="progress-label">Report Completion</span>
+                            <span class="progress-value">85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill reports"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple animation for stats counting up
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate stats counting up
+            const statValues = document.querySelectorAll('.stat-value');
+            
+            statValues.forEach(stat => {
+                const target = parseInt(stat.textContent.replace(/,/g, ''));
+                const suffix = stat.textContent.replace(/[0-9,]/g, '');
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(current).toLocaleString() + suffix;
+                }, 30);
+            });
+            
+            // Add interactivity to action buttons
+            const actionButtons = document.querySelectorAll('.action-btn');
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.textContent.trim();
+                    alert(`Action: ${action}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

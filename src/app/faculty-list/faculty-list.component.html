@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<h2>👨‍🏫 Faculty & Admin List</h2>
+
+<table *ngIf="data.length > 0; else noData" border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>Gender</th>
+      <th>Contact No</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let faculty of data; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ faculty.firstName }} {{ faculty.lastName }}</td>
+      <td>{{ faculty.email }}</td>
+      <td>{{ faculty.gender }}</td>
+      <td>{{ faculty.contactNo }}</td>
+      <td>{{ faculty.role | titlecase }}</td>
+      <td>
+        <button (click)="viewFaculty(faculty._id)">View</button>
+        <button (click)="editFaculty(faculty._id)">Edit</button>
+        <button (click)="deleteFaculty(faculty._id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #noData>
+  <p>No faculty or admin data found.</p>
+</ng-template>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Killer - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #325dae 0%, #3569c1 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .welcome-section {
+            flex: 1;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><circle cx="50" cy="50" r="40" stroke="white" stroke-width="2" fill="none" /></svg>');
+            background-size: 80px 80px;
+        }
+
+        .welcome-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-subtitle {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            opacity: 0.9;
+        }
+
+        .features {
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .feature i {
+            font-size: 20px;
+            margin-right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .credit {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            opacity: 0.7;
+            z-index: 1;
+        }
+
+        .login-section {
+            flex: 1;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .lux-title {
+            color: #1e3c72;
+            text-align: center;
+            font-weight: 700;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .lux-title span {
+            background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .lux-subtitle {
+            color: #2a5298;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .lux-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .lux-form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lux-form-group label {
+            color: #2a5298;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .lux-form-group input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(42, 82, 152, 0.2);
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: #1e3c72;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .lux-form-group input::placeholder {
+            color: rgba(30, 60, 114, 0.5);
+        }
+
+        .lux-form-group input:focus {
+            background: rgba(255, 255, 255, 1);
+            border-color: rgba(42, 82, 152, 0.5);
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+        }
+
+        .lux-error {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 6px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .lux-error i {
+            margin-right: 5px;
+            font-size: 14px;
+        }
+
+        .lux-button {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.2);
+        }
+
+        .lux-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30, 60, 114, 0.3);
+        }
+
+        .lux-button:active {
+            transform: translateY(0);
+        }
+
+        .lux-button:disabled {
+            background: rgba(42, 82, 152, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .lux-footer {
+            text-align: center;
+            color: #2a5298;
+            font-size: 14px;
+            margin-top: 25px;
+        }
+
+        .lux-footer a {
+            color: #1e3c72;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lux-footer a:hover {
+            color: #2a5298;
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .welcome-section, .login-section {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-section, .login-section {
+                padding: 30px 20px;
+            }
+            
+            .welcome-title {
+                font-size: 28px;
+            }
+            
+            .lux-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-section">
+            <h1 class="welcome-title">Welcome to Report App</h1>
+            <p class="welcome-subtitle">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam nonummy nibh euismod
+                tincidunt ut laoreet dolore magna aliquam erat volutpat.
+            </p>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-rocket"></i>
+                    <p>Fast and reliable testing platform</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <p>Secure and private environment</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-chart-line"></i>
+                    <p>Track your progress with analytics</p>
+                </div>
+            </div>
+            
+            <div class="credit">designed by Royal</div>
+        </div>
+        
+        <div class="login-section">
+            <h1 class="lux-title">Welcome to <span>Report App</span></h1>
+            <p class="lux-subtitle">Sign in to your account</p>
+
+            <form [formGroup]="loginForm" (ngSubmit)="login()" class="lux-form">
+  
+                  <div class="lux-form-group">
+                    <label>Email</label>
+                    <input type="email" formControlName="email" placeholder="Enter email" />
+                    <small *ngIf="loginForm.controls.email.touched && loginForm.controls.email.hasError('required')" class="lux-error">
+                      * Email is required
+                    </small>
+                  </div>
+
+                <div class="lux-form-group">
+                  <label>Password</label>
+                  <input type="password" formControlName="password" placeholder="Enter password" />
+                  <small *ngIf="loginForm.controls.password.touched && loginForm.controls.password.hasError('required')" class="lux-error">
+                    * Password is required
+                  </small>
+                </div>
+
+                <button type="submit" class="lux-button">{{ loginText }}</button>
+
+                <p class="lux-footer">
+                    New here? <a href="#">Create an account</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

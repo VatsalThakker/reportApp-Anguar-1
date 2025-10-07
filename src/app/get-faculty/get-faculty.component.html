@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+<div *ngIf="faculty; else loading" class="faculty-view-container">
+  <h2>👤 Faculty Details</h2>
+
+  <div class="faculty-info">
+    <p><strong>First Name:</strong> {{ faculty.firstName }}</p>
+    <p><strong>Last Name:</strong> {{ faculty.lastName }}</p>
+    <p><strong>Email:</strong> {{ faculty.email }}</p>
+    <p><strong>Gender:</strong> {{ faculty.gender }}</p>
+    <p><strong>Contact No:</strong> {{ faculty.contactNo }}</p>
+    <p><strong>Role:</strong> {{ faculty.role }}</p>
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <p>Loading faculty details...</p>
+</ng-template>

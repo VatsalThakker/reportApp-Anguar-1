@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report List - MyApp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+
+    <div class="container">
+        <!-- Your Original Angular Structure with Enhanced UI -->
+        <app-navbar></app-navbar>
+        <h2>Report List</h2>
+        
+        <div class="table-container">
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Student</th>
+                <th>Faculty</th>
+                <th>Subject</th>
+                <th>Discipline</th>
+                <th>Regularity</th>
+                <th>Communication</th>
+                <th>Test</th>
+                <th>Total</th>
+                <th>Percent</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+          
+            <tbody>
+              <tr *ngFor="let r of reports; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ r.student_id?.firstName }} {{ r.student_id?.lastName }}</td>
+                <td>{{ r.faculty_id?.firstName }} {{ r.faculty_id?.lastName }}</td>
+                <td>{{ r.subject }}</td>
+                <td>{{ r.discipline }}</td>
+                <td>{{ r.regularity }}</td>
+                <td>{{ r.communication }}</td>
+                <td>{{ r.test }}</td>
+                <td >{{ r.total || '-' }}</td>
+                <td class="percentage-cell">{{ r.per || '-' }}%</td>
+                <td class="status-badge status-excellent">{{ r.sstatus || '-' }}</td>
+                <td>
+                  <button class="action-btn btn-edit" (click)="editReport(r._id)">✏️ Edit</button>
+                  <button class="action-btn btn-delete" (click)="deleteReport(r._id)">🗑️ Delete</button>
+                  <button class="action-btn btn-view" (click)="viewReport(r._id)">🔍 View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+            <!-- Empty State (Hidden by default) -->
+            <div class="empty-state" style="display: none;">
+                <i class="fas fa-clipboard-list"></i>
+                <h3>No Reports Found</h3>
+                <p>There are no reports to display at the moment.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample script for demonstration purposes
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add percentage-based coloring
+            const percentageCells = document.querySelectorAll('.percentage-cell');
+            percentageCells.forEach(cell => {
+                const percentage = parseInt(cell.textContent);
+                if (percentage >= 80) {
+                    cell.classList.add('high');
+                } else if (percentage >= 60) {
+                    cell.classList.add('medium');
+                } else {
+                    cell.classList.add('low');
+                }
+            });
+            
+            // Add click handlers for buttons (would be handled by Angular in real app)
+            document.querySelectorAll('.btn-edit').forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log('Edit button clicked');
+                });
+            });
+            
+            document.querySelectorAll('.btn-delete').forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log('Delete button clicked');
+                });
+            });
+            
+            document.querySelectorAll('.btn-view').forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log('View button clicked');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

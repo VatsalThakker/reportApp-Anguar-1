@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.lux-login-container {
+  height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.lux-glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lux-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.lux-title span {
+  color: #00d2ff;
+}
+
+.lux-form-group {
+  margin-bottom: 20px;
+}
+
+.lux-form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #e0f7fa;
+}
+
+.lux-form-group input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.lux-form-group input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 5px #00d2ff;
+}
+
+.lux-error {
+  color: #ff6b6b;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.lux-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.lux-button:hover {
+  background: linear-gradient(90deg, #3a7bd5, #00d2ff);
+}
+
+.lux-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.lux-footer a {
+  color: #00d2ff;
+  font-weight: 500;
+  text-decoration: none;
+}

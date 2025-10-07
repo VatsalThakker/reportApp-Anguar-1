@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List - MyApp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Navbar Styles */
+        .lux-navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 15px 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lux-navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .lux-navbar-brand {
+            font-weight: 700;
+            font-size: 24px;
+            color: #1e3c72 !important;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .lux-navbar-brand i {
+            margin-right: 10px;
+            font-size: 26px;
+        }
+
+        /* Table Container */
+        .table-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .table-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .table-title {
+            color: #1e3c72;
+            font-weight: 700;
+            font-size: 28px;
+        }
+
+        .table-subtitle {
+            color: #2a5298;
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        .table-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(42, 82, 152, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px 12px 45px;
+            color: #1e3c72;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            outline: none;
+            width: 250px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .search-input:focus {
+            background: rgba(255, 255, 255, 1);
+            border-color: rgba(42, 82, 152, 0.5);
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            color: #2a5298;
+            font-size: 16px;
+        }
+
+        /* Table Styles */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .styled-table thead {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .styled-table th {
+            color: white;
+            font-weight: 600;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid rgba(42, 82, 152, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .styled-table tbody tr:nth-child(even) {
+            background: rgba(30, 60, 114, 0.03);
+        }
+
+        .styled-table tbody tr:hover {
+            background: rgba(30, 60, 114, 0.08);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .styled-table td {
+            padding: 14px 12px;
+            color: #2a5298;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(42, 82, 152, 0.2);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: #2a5298;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .action-btn.edit {
+            color: #1e3c72;
+            border-color: rgba(30, 60, 114, 0.3);
+        }
+
+        .action-btn.edit:hover {
+            background: rgba(30, 60, 114, 0.1);
+        }
+
+        .action-btn.delete {
+            color: #e74c3c;
+            border-color: rgba(231, 76, 60, 0.3);
+        }
+
+        .action-btn.delete:hover {
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .action-btn.view {
+            color: #2ecc71;
+            border-color: rgba(46, 204, 113, 0.3);
+        }
+
+        .action-btn.view:hover {
+            background: rgba(46, 204, 113, 0.1);
+        }
+
+        .action-btn.report {
+            color: #9b59b6;
+            border-color: rgba(155, 89, 182, 0.3);
+        }
+
+        .action-btn.report:hover {
+            background: rgba(155, 89, 182, 0.1);
+        }
+
+        .action-btn i {
+            font-size: 12px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #2a5298;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .empty-state p {
+            font-size: 16px;
+            opacity: 0.7;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .page-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(42, 82, 152, 0.2);
+            border-radius: 8px;
+            padding: 10px 15px;
+            color: #2a5298;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn:hover {
+            background: rgba(30, 60, 114, 0.1);
+        }
+
+        .page-btn.active {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .table-container {
+                padding: 25px 20px;
+            }
+            
+            .styled-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .table-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .search-input {
+                width: 200px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .action-btn {
+                justify-content: center;
+                padding: 6px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .table-container {
+                padding: 20px 15px;
+            }
+            
+            .table-title {
+                font-size: 24px;
+            }
+            
+            .search-input {
+                width: 150px;
+            }
+            
+            .styled-table th, 
+            .styled-table td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <!-- <nav class="lux-navbar">
+            <a class="lux-navbar-brand" href="#">
+                <i class="fas fa-graduation-cap"></i> MyApp
+            </a>
+        </nav> -->
+        <app-navbar></app-navbar>
+        <!-- Table Container -->
+        <div class="table-container">
+            <div class="table-header">
+                <div>
+                    <h1 class="table-title">Student List</h1>
+                    <p class="table-subtitle">Manage all student records in one place</p>
+                </div>
+                <div class="table-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Search students...">
+                    </div>
+                </div>
+            </div>
+
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Gender</th>
+                  <th>Batch</th>
+                  <th>College</th>
+                  <th>Branch</th>
+                  <th>Contact</th>
+                  <th>Action</th> <!-- ✅ New column -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let student of data; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ student.firstName }}</td>
+                  <td>{{ student.lastName }}</td>
+                  <td>{{ student.email }}</td>
+                  <td>{{ student.gender }}</td>
+                  <td>{{ student.batch }}</td>
+                  <td>{{ student.collegeName }}</td>
+                  <td>{{ student.branch }}</td>
+                  <td>{{ student.contactNo }}</td>
+                  <td>
+                    <button class="action-btn edit"  (click)="editStudent(student._id)">✏️ Edit</button>
+                    <button class="action-btn delete" (click)="deleteStudent(student._id)">🗑️ Delete</button>
+                    <button class="action-btn view" (click)="viewStudent(student._id)">👁️ View</button>
+                    <button class="action-btn report" (click)="viewReport(student._id)">📊 Report</button> <!-- ✅ New -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-btn">Previous</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample interactivity for demonstration
+        document.addEventListener('DOMContentLoaded', function() {
+            // Action button functionality
+            const actionButtons = document.querySelectorAll('.action-btn');
+            
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const actionType = this.classList[1]; // edit, delete, view, report
+                    alert(`${actionType.charAt(0).toUpperCase() + actionType.slice(1)} action triggered!`);
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.querySelector('.search-input');
+            searchInput.addEventListener('input', function() {
+                console.log('Searching for:', this.value);
+                // In a real app, this would filter the table
+            });
+            
+            // Pagination
+            const pageButtons = document.querySelectorAll('.page-btn');
+            pageButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!this.classList.contains('active')) {
+                        document.querySelector('.page-btn.active').classList.remove('active');
+                        this.classList.add('active');
+                        alert(`Navigating to page ${this.textContent}`);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

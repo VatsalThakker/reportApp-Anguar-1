@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+<div class="student-list-container">
+    <h2>Students</h2>
+  
+    <table *ngIf="students.length > 0" class="student-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Action</th> <!-- 👈 Add Action column -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{ student.firstName }} {{ student.lastName }}</td>
+          <td>{{ student.email }}</td>
+          <td>
+            <!-- 👇 View Student Button -->
+            <button (click)="viewStudent(student._id)">View</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <p *ngIf="students.length === 0">No students found.</p>
+  </div>
+  
