@@ -53,7 +53,7 @@ export class AddReportComponent {
     this.reportService.addReport(reportData).subscribe({
       next: () => {
         this.toastr.success('Report added successfully!');
-        this.router.navigate(['/reportlist']); // update route if needed
+        this.router.navigate(['/students']); // update route if needed
       },
       error: (err) => {
         console.error(err);
