@@ -15,6 +15,7 @@ import { ReportListComponent } from './report-list/report-list.component';
 import { UpdateReportComponent } from './update-report/update-report.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ViewReportSearchComponent } from './view-report-search/view-report-search.component';
 
 export const routes: Routes = [
     {path:'login',component:LoginComponent},
@@ -33,5 +34,6 @@ export const routes: Routes = [
     {path:'reportlist',component:ReportListComponent},
     {path:'editreport/:id',component:UpdateReportComponent},
     {path:'dashboard',component:DashboardComponent},
-    {path:'nav',component:NavbarComponent}
+    {path:'nav',component:NavbarComponent},
+    {path:'searchreport',component:ViewReportSearchComponent}
 ];

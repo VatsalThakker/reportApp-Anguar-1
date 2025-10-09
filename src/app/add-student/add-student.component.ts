@@ -66,7 +66,9 @@ export class AddStudentComponent {
         // });
         this.studentForm.reset();
         this.submitText = 'Submit';
-        this.router.navigateByUrl('/students'); // Update route as needed
+        console.log(res);
+        
+        this.router.navigateByUrl('/addreport'+res.user._id); // Update route as needed
       },
       error: (err) => {
         console.error('Error:', err);

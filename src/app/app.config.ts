@@ -3,6 +3,7 @@ import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } fr
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
 
@@ -10,7 +11,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-
+    provideHttpClient(),
     // ✅ Required for ngx-toastr to work in standalone apps
     provideAnimations(),
     importProvidersFrom(

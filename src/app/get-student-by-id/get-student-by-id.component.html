@@ -1,861 +1,928 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Report Card - MyApp</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #fff;
-        }
-
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        /* Navbar Styles */
-        .lux-navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 15px 25px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .lux-navbar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
-        }
-
-        .lux-navbar-brand {
-            font-weight: 700;
-            font-size: 24px;
-            color: #1e3c72 !important;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-
-        .lux-navbar-brand i {
-            margin-right: 10px;
-            font-size: 26px;
-        }
-
-        /* Report Card Container */
-        .report-card-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .report-card-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, #1e3c72 0%, #2a5298 100%);
-        }
-
-        .watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 120px;
-            font-weight: 900;
-            color: rgba(30, 60, 114, 0.03);
-            z-index: 0;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-
-        /* Report Header */
-        .report-header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 25px;
-            border-bottom: 2px solid rgba(42, 82, 152, 0.1);
-            position: relative;
-            z-index: 1;
-        }
-
-        .report-title {
-            color: #1e3c72;
-            font-weight: 800;
-            font-size: 38px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .report-title i {
-            margin-right: 15px;
-            font-size: 40px;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .report-subtitle {
-            color: #2a5298;
-            font-size: 18px;
-            opacity: 0.8;
-            font-weight: 500;
-        }
-
-        .academic-year {
-            display: inline-block;
-            margin-top: 10px;
-            background: rgba(30, 60, 114, 0.1);
-            padding: 5px 15px;
-            border-radius: 20px;
-            color: #1e3c72;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        /* Student Info Section */
-        .student-info-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 18px;
-            padding: 35px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(42, 82, 152, 0.1);
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 35px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-            transition: transform 0.3s ease;
-        }
-
-        .student-info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .profile-section {
-            text-align: center;
-            position: relative;
-        }
-
-        .profile-pic {
-            width: 170px;
-            height: 170px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 6px solid rgba(30, 60, 114, 0.1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .profile-pic:hover {
-            border-color: rgba(30, 60, 114, 0.3);
-            transform: scale(1.05);
-        }
-
-        .profile-placeholder {
-            width: 170px;
-            height: 170px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 60px;
-            border: 6px solid rgba(30, 60, 114, 0.1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .profile-placeholder:hover {
-            border-color: rgba(30, 60, 114, 0.3);
-            transform: scale(1.05);
-        }
-
-        .student-id {
-            margin-top: 15px;
-            padding: 8px 15px;
-            background: rgba(30, 60, 114, 0.1);
-            border-radius: 10px;
-            color: #1e3c72;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .student-details {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .detail-item {
-            display: flex;
-            flex-direction: column;
-            padding: 18px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 14px;
-            border-left: 4px solid #1e3c72;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-        }
-
-        .detail-item:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .detail-label {
-            color: #2a5298;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-
-        .detail-label i {
-            margin-right: 10px;
-            font-size: 16px;
-            width: 20px;
-            text-align: center;
-        }
-
-        .detail-value {
-            color: #1e3c72;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        /* Reports Section */
-        .reports-section {
-            margin-top: 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(42, 82, 152, 0.1);
-        }
-
-        .section-title {
-            color: #1e3c72;
-            font-weight: 700;
-            font-size: 26px;
-            display: flex;
-            align-items: center;
-        }
-
-        .section-title i {
-            margin-right: 12px;
-            font-size: 28px;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .section-controls {
-            display: flex;
-            gap: 15px;
-        }
-
-        .control-btn {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(42, 82, 152, 0.2);
-            border-radius: 10px;
-            padding: 10px 18px;
-            color: #2a5298;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-        }
-
-        .control-btn:hover {
-            background: rgba(30, 60, 114, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .control-btn i {
-            font-size: 14px;
-        }
-
-        .reports-table-container {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(42, 82, 152, 0.1);
-            position: relative;
-        }
-
-        .report-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .report-table thead {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        }
-
-        .report-table th {
-            color: white;
-            font-weight: 600;
-            padding: 18px 15px;
-            text-align: left;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            position: relative;
-        }
-
-        .report-table th:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 20%;
-            height: 60%;
-            width: 1px;
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .report-table tbody tr {
-            border-bottom: 1px solid rgba(42, 82, 152, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .report-table tbody tr:nth-child(even) {
-            background: rgba(30, 60, 114, 0.03);
-        }
-
-        .report-table tbody tr:hover {
-            background: rgba(30, 60, 114, 0.08);
-            transform: scale(1.005);
-        }
-
-        .report-table td {
-            padding: 16px 15px;
-            color: #2a5298;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .grade-cell {
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .percentage-cell {
-            text-align: center;
-            font-weight: 700;
-        }
-
-        .status-badge {
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: inline-block;
-            text-align: center;
-            min-width: 80px;
-        }
-
-        .status-pass {
-            background: rgba(46, 204, 113, 0.2);
-            color: #27ae60;
-            border: 1px solid rgba(46, 204, 113, 0.3);
-        }
-
-        .status-fail {
-            background: rgba(231, 76, 60, 0.2);
-            color: #c0392b;
-            border: 1px solid rgba(231, 76, 60, 0.3);
-        }
-
-        .status-pending {
-            background: rgba(241, 196, 15, 0.2);
-            color: #d35400;
-            border: 1px solid rgba(241, 196, 15, 0.3);
-        }
-
-        .action-btn {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            border: none;
-            border-radius: 10px;
-            padding: 10px 18px;
-            color: white;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 10px rgba(30, 60, 114, 0.2);
-            letter-spacing: 0.5px;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(30, 60, 114, 0.3);
-        }
-
-        .action-btn i {
-            font-size: 12px;
-        }
-
-        /* Performance Summary */
-        .performance-summary {
-            margin-top: 30px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .summary-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(42, 82, 152, 0.1);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .summary-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .summary-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 24px;
-            color: white;
-        }
-
-        .summary-card:nth-child(1) .summary-icon {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        }
-
-        .summary-card:nth-child(2) .summary-icon {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-        }
-
-        .summary-card:nth-child(3) .summary-icon {
-            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-        }
-
-        .summary-card:nth-child(4) .summary-icon {
-            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
-        }
-
-        .summary-value {
-            color: #1e3c72;
-            font-weight: 700;
-            font-size: 28px;
-            margin-bottom: 5px;
-        }
-
-        .summary-label {
-            color: #2a5298;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        /* Empty and Loading States */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #2a5298;
-        }
-
-        .empty-state i {
-            font-size: 60px;
-            margin-bottom: 20px;
-            opacity: 0.5;
-        }
-
-        .empty-state p {
-            font-size: 18px;
-            opacity: 0.7;
-            margin-bottom: 15px;
-        }
-
-        .empty-state .action-btn {
-            margin: 0 auto;
-            width: fit-content;
-        }
-
-        .loading-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #2a5298;
-        }
-
-        .loading-state i {
-            font-size: 40px;
-            margin-bottom: 20px;
-            color: #1e3c72;
-            animation: spin 1.5s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-state p {
-            font-size: 18px;
-            opacity: 0.8;
-        }
-
-        /* Footer */
-        .report-footer {
-            margin-top: 40px;
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(42, 82, 152, 0.1);
-            color: #2a5298;
-            font-size: 14px;
-            opacity: 0.7;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 1200px) {
-            .performance-summary {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 992px) {
-            .student-info-card {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .student-details {
-                grid-template-columns: 1fr;
-            }
-            
-            .report-table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .report-card-container {
-                padding: 30px 25px;
-            }
-            
-            .report-title {
-                font-size: 32px;
-            }
-            
-            .profile-pic, .profile-placeholder {
-                width: 140px;
-                height: 140px;
-            }
-            
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
-            .section-controls {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            .performance-summary {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .report-card-container {
-                padding: 25px 20px;
-            }
-            
-            .report-title {
-                font-size: 28px;
-            }
-            
-            .student-info-card {
-                padding: 25px;
-            }
-            
-            .detail-item {
-                padding: 15px;
-            }
-            
-            .report-table th, 
-            .report-table td {
-                padding: 12px 10px;
-                font-size: 13px;
-            }
-            
-            .watermark {
-                font-size: 80px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROYAL TECHNOSOFT - Student Report</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Report Card Container */
+    .report-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .report-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+    }
+
+    .report-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #1e3c72, #2a5298);
+    }
+
+    .watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      font-size: 120px;
+      font-weight: 900;
+      color: rgba(30, 60, 114, 0.03);
+      z-index: 0;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* Header Section */
+    .report-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 25px;
+      border-bottom: 2px solid rgba(42, 82, 152, 0.1);
+      position: relative;
+      z-index: 1;
+    }
+
+    .company-name {
+      color: #1e3c72;
+      font-weight: 800;
+      font-size: 32px;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .report-title {
+      color: #2a5298;
+      font-weight: 600;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .academic-year {
+      display: inline-block;
+      background: rgba(30, 60, 114, 0.1);
+      padding: 8px 20px;
+      border-radius: 20px;
+      color: #1e3c72;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    /* Student Info Card */
+    .student-info-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 16px;
+      padding: 35px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(42, 82, 152, 0.1);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 35px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
+    }
+
+    .student-info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-section {
+      text-align: center;
+      position: relative;
+    }
+
+    .profile-pic {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid rgba(30, 60, 114, 0.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .profile-pic:hover {
+      border-color: rgba(30, 60, 114, 0.3);
+      transform: scale(1.05);
+    }
+
+    .profile-placeholder {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 60px;
+      border: 6px solid rgba(30, 60, 114, 0.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .profile-placeholder:hover {
+      border-color: rgba(30, 60, 114, 0.3);
+      transform: scale(1.05);
+    }
+
+    .student-id {
+      margin-top: 15px;
+      padding: 8px 15px;
+      background: rgba(30, 60, 114, 0.1);
+      border-radius: 10px;
+      color: #1e3c72;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .student-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 14px;
+      border-left: 4px solid #1e3c72;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .detail-item:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .detail-label {
+      color: #2a5298;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .detail-label i {
+      margin-right: 10px;
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .detail-value {
+      color: #1e3c72;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    /* Table Styles */
+    .table-section {
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title {
+      color: #1e3c72;
+      font-weight: 700;
+      font-size: 26px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+    }
+
+    .section-title i {
+      margin-right: 12px;
+      font-size: 28px;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-controls {
+      display: flex;
+      gap: 15px;
+    }
+
+    .control-btn {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(42, 82, 152, 0.2);
+      border-radius: 10px;
+      padding: 10px 18px;
+      color: #2a5298;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .control-btn:hover {
+      background: rgba(30, 60, 114, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .control-btn i {
+      font-size: 14px;
+    }
+
+    .reports-table-container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(42, 82, 152, 0.1);
+      position: relative;
+    }
+
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0;
+    }
+
+    .report-table thead {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    }
+
+    .report-table th {
+      color: white;
+      font-weight: 600;
+      padding: 18px 15px;
+      text-align: left;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+
+    .report-table th:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .report-table tbody tr {
+      border-bottom: 1px solid rgba(42, 82, 152, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .report-table tbody tr:nth-child(even) {
+      background: rgba(30, 60, 114, 0.03);
+    }
+
+    .report-table tbody tr:hover {
+      background: rgba(30, 60, 114, 0.08);
+      transform: scale(1.005);
+    }
+
+    .report-table td {
+      padding: 16px 15px;
+      color: #2a5298;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 10px rgba(30, 60, 114, 0.2);
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(30, 60, 114, 0.3);
+    }
+
+    .action-btn i {
+      font-size: 12px;
+    }
+
+    /* Academic Summary */
+    .academic-summary {
+      margin-bottom: 40px;
+      padding: 25px;
+      background: #f9f9f9;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(42, 82, 152, 0.1);
+      position: relative;
+      z-index: 1;
+    }
+
+    .academic-summary h3 {
+      color: #1e3c72;
+      font-weight: 700;
+      font-size: 26px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+    }
+
+    .academic-summary h3 i {
+      margin-right: 12px;
+      font-size: 28px;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      transition: all 0.3s ease;
+      border-left: 4px solid #1e3c72;
+    }
+
+    .summary-item:hover {
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      transform: translateY(-3px);
+    }
+
+    .summary-label {
+      color: #666;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .summary-value {
+      color: #1e3c72;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    /* Performance Chart Section */
+    .performance-chart-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chart-container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(42, 82, 152, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chart-container h3 {
+      color: #1e3c72;
+      font-weight: 700;
+      font-size: 22px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .chart-container h3 i {
+      margin-right: 10px;
+      font-size: 24px;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .chart-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+    }
+
+    .subject-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .subject-table thead {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    }
+
+    .subject-table th {
+      color: white;
+      font-weight: 600;
+      padding: 12px 15px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .subject-table td {
+      padding: 10px 15px;
+      border-bottom: 1px solid rgba(42, 82, 152, 0.1);
+      font-size: 14px;
+      color: #2a5298;
+    }
+
+    .subject-table tbody tr:nth-child(even) {
+      background: rgba(30, 60, 114, 0.03);
+    }
+
+    .subject-table tbody tr:hover {
+      background: rgba(30, 60, 114, 0.08);
+    }
+
+    /* Footer */
+    .report-footer {
+      text-align: center;
+      padding-top: 25px;
+      border-top: 1px solid rgba(42, 82, 152, 0.1);
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1200px) {
+      .performance-chart-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .student-info-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .student-details {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .report-card {
+        padding: 25px 20px;
+      }
+      .report-title {
+        font-size: 20px;
+      }
+      .company-name {
+        font-size: 26px;
+      }
+      .profile-pic, .profile-placeholder {
+        width: 120px;
+        height: 120px;
+      }
+      .section-controls {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .report-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 576px) {
+      body {
+        padding: 10px;
+      }
+      .report-card {
+        padding: 20px 15px;
+      }
+      .report-title {
+        font-size: 18px;
+      }
+      .company-name {
+        font-size: 22px;
+      }
+      .student-info-card {
+        padding: 20px;
+      }
+      .detail-item {
+        padding: 12px;
+      }
+      .report-table th,
+      .report-table td,
+      .subject-table th,
+      .subject-table td {
+        padding: 10px 8px;
+        font-size: 12px;
+      }
+      .action-btn,
+      .control-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+      .watermark {
+        font-size: 60px;
+      }
+    }
+
+    /* Loading State */
+    .loading-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #2a5298;
+    }
+
+    .loading-state i {
+      font-size: 40px;
+      margin-bottom: 20px;
+      color: #1e3c72;
+      animation: spin 1.5s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-state p {
+      font-size: 18px;
+      opacity: 0.8;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #2a5298;
+    }
+
+    .empty-state i {
+      font-size: 60px;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+
+    .empty-state p {
+      font-size: 18px;
+      opacity: 0.7;
+      margin-bottom: 15px;
+    }
+
+    .empty-state .action-btn {
+      margin: 0 auto;
+      width: fit-content;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Navigation Bar -->
-        <!-- <nav class="lux-navbar">
-            <a class="lux-navbar-brand" href="#">
-                <i class="fas fa-graduation-cap"></i> MyApp
-            </a>
-        </nav> -->
-        <app-navbar></app-navbar>
-        <!-- Report Card Container -->
-        <div class="report-card-container">
-            <div class="watermark">ACADEMIC REPORT</div>
-            
-            <!-- Report Header -->
-            <div class="report-header">
-                <h1 class="report-title">
-                    <i class="fas fa-file-certificate"></i> Student Report Card
-                </h1>
-                <p class="report-subtitle">Comprehensive Academic Performance Overview</p>
-                <div class="academic-year">Academic Year 2023-2024</div>
-            </div>
+  <div class="container">
+    <div class="report-card">
+      <div class="watermark">ACADEMIC REPORT</div>
 
-            <!-- Student Details -->
-            <div *ngIf="student" class="student-info-card">
-                <div class="profile-section">
-                    <img *ngIf="student.profilePicUrl" [src]="student.profilePicUrl" alt="Profile Picture" class="profile-pic" />
-                    <div *ngIf="!student.profilePicUrl" class="profile-placeholder">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                    <div class="student-id">ID: STU-2023-00125</div>
-                </div>
-                <div class="student-details">
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-user"></i> Full Name</span>
-                        <span class="detail-value">{{ student.firstName }} {{ student.lastName }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-envelope"></i> Email</span>
-                        <span class="detail-value">{{ student.email }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-venus-mars"></i> Gender</span>
-                        <span class="detail-value">{{ student.gender }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-code-branch"></i> Branch</span>
-                        <span class="detail-value">{{ student.branch }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-users"></i> Batch</span>
-                        <span class="detail-value">{{ student.batch }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-university"></i> College</span>
-                        <span class="detail-value">{{ student.collegeName }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-phone"></i> Contact</span>
-                        <span class="detail-value">{{ student.contactNo }}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-calendar-alt"></i> Enrollment Date</span>
-                        <span class="detail-value">15 Aug 2023</span>
-                    </div>
-                </div>
-            </div>
+      <!-- Header Section -->
+      <div class="report-header">
+        <div class="company-name">ROYAL TECHNOSOFT PVT LTD</div>
+        <div class="report-title">COMPREHENSIVE STUDENT REPORT</div>
+        <div class="academic-year">Academic Year 2023-2024</div>
+      </div>
 
-            <!-- Performance Summary -->
-            <div class="performance-summary">
-                <div class="summary-card">
-                    <div class="summary-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="summary-value">82.5%</div>
-                    <div class="summary-label">Overall Average</div>
-                </div>
-                <div class="summary-card">
-                    <div class="summary-icon">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <div class="summary-value">6</div>
-                    <div class="summary-label">Subjects</div>
-                </div>
-                <div class="summary-card">
-                    <div class="summary-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="summary-value">4</div>
-                    <div class="summary-label">Passed</div>
-                </div>
-                <div class="summary-card">
-                    <div class="summary-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <div class="summary-value">A-</div>
-                    <div class="summary-label">Grade</div>
-                </div>
-            </div>
+      <!-- Student Info -->
+      <div *ngIf="student" class="student-info-card">
+        <div class="profile-section">
+          <img *ngIf="student.profilePicUrl" [src]="student.profilePicUrl" alt="Profile Picture" class="profile-pic" />
+          <div *ngIf="!student.profilePicUrl" class="profile-placeholder">
+            <i class="fas fa-user-graduate"></i>
+          </div>
+          <div class="student-id">ID: STU-2023-00125</div>
+        </div>
+        <div class="student-details">
+          <div class="detail-item">
+            <span class="detail-label"><i class="fas fa-user"></i> Full Name</span>
+            <span class="detail-value">{{ student.firstName }} {{ student.lastName }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label"><i class="fas fa-envelope"></i> Email</span>
+            <span class="detail-value">{{ student.email }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label"><i class="fas fa-venus-mars"></i> Gender</span>
+            <span class="detail-value">{{ student.gender }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label"><i class="fas fa-code-branch"></i> Branch</span>
+            <span class="detail-value">{{ student.branch }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label"><i class="fas fa-users"></i> Batch</span>
+            <span class="detail-value">{{ student.batch }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label"><i class="fas fa-university"></i> College</span>
+            <span class="detail-value">{{ student.collegeName }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label"><i class="fas fa-phone"></i> Contact</span>
+            <span class="detail-value">{{ student.contactNo }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label"><i class="fas fa-calendar-alt"></i> Enrollment Date</span>
+            <span class="detail-value">15 Aug 2023</span>
+          </div>
+        </div>
+      </div>
 
-            <!-- Reports Section -->
-            <div class="reports-section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-chart-line"></i> Academic Performance
-                    </h2>
-                    <div class="section-controls">
-                        <button class="control-btn">
-                            <i class="fas fa-print"></i> Print
-                        </button>
-                        <button class="control-btn">
-                            <i class="fas fa-download"></i> Export
-                        </button>
-                    </div>
-                </div>
-
-                <div *ngIf="reports.length > 0" class="reports-table-container">
-                  <table class="report-table" *ngIf="reports.length > 0">
-                    <thead>
-                      <tr>
-                        <th>Subject</th>
-                        <th>Faculty Name</th>
-                        <th>Discipline</th>
-                        <th>Regularity</th>
-                        <th>Communication</th>
-                        <th>Test</th>
-                        <th>Total</th>
-                        <th>Percentage</th>
-                        <th>Status</th>
-                        <th>Action</th> <!-- ✅ Column header for button -->
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let report of reports">
-                        <td>{{ report.subject }}</td>
-                        <td>{{ report?.faculty_id?.firstName }} {{ report?.faculty_id?.lastName }} </td>
-                        <td>{{ report.discipline }}</td>
-                        <td>{{ report.regularity }}</td>
-                        <td>{{ report.communication }}</td>
-                        <td>{{ report.test }}</td>
-                        <td>{{ report.total }}</td>
-                        <td>{{ report.per }}%</td>
-                        <td>{{ report.sstatus }}</td>
-                        <td>
-                          <button class="action-btn" (click)="viewReportDetails(report._id)">Details</button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                
-                </div>
-
-                <div *ngIf="reports.length === 0" class="empty-state">
-                    <i class="fas fa-file-excel"></i>
-                    <p>No reports found for this student.</p>
-                    <a class="action-btn" routerLink="/addreport/{{student._id}}">
-                        <i class="fas fa-plus"></i> Generate First Report
-                    </a>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="report-footer">
-                <p>This report was generated on 15 December 2023. For any discrepancies, please contact the administration office.</p>
-            </div>
+      <!-- Reports Section -->
+      <div class="table-section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-chart-line"></i> Academic Performance
+          </h2>
+          <div class="section-controls">
+            <button class="control-btn"><i class="fas fa-print"></i> Print</button>
+            <button class="control-btn"><i class="fas fa-download"></i> Export</button>
+          </div>
         </div>
 
-        <!-- Loading State -->
-        <div *ngIf="!student" class="report-card-container">
-            <div class="loading-state">
-                <i class="fas fa-spinner"></i>
-                <p>Loading student data...</p>
-            </div>
+        <div *ngIf="reports.length > 0" class="reports-table-container">
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Faculty Name</th>
+                <th>Discipline</th>
+                <th>Regularity</th>
+                <th>Communication</th>
+                <th>Test</th>
+                <th>Total</th>
+                <th>Percentage</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let report of reports">
+                <td>{{ report.subject }}</td>
+                <td>{{ report?.faculty_id?.firstName }} {{ report?.faculty_id?.lastName }}</td>
+                <td>{{ report.discipline }}</td>
+                <td>{{ report.regularity }}</td>
+                <td>{{ report.communication }}</td>
+                <td>{{ report.test }}</td>
+                <td>{{ report.total }}</td>
+                <td>{{ report.per }}%</td>
+                <td>{{ report.sstatus }}</td>
+                <td>
+                  <button class="action-btn" (click)="viewReportDetails(report._id)"><i class="fas fa-eye"></i> Details</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
+        <div *ngIf="reports.length === 0" class="empty-state">
+          <i class="fas fa-file-excel"></i>
+          <p>No reports found for this student.</p>
+          <a class="action-btn" routerLink="/addreport/{{student._id}}">
+            <i class="fas fa-plus"></i> Generate First Report
+          </a>
+        </div>
+      </div>
+
+      <!-- Overall Academic Summary -->
+      <div class="academic-summary">
+        <h3><i class="fas fa-chart-line"></i> OVERALL ACADEMIC SUMMARY:</h3>
+        <div class="summary-grid">
+          <div class="summary-item">
+            <span class="summary-label">Average Discipline:</span>
+            <span class="summary-value">6.5%</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Average Test Score:</span>
+            <span class="summary-value">5.2%</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Average Regularity:</span>
+            <span class="summary-value">4.0%</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Overall Performance:</span>
+            <span class="summary-value">72.5%</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Average Communication:</span>
+            <span class="summary-value">2.8%</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Overall Status:</span>
+            <span class="summary-value">(Total)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Performance Chart Section -->
+      <div class="performance-chart-section">
+        <div class="chart-container">
+          <h3><i class="fas fa-chart-pie"></i> SUBJECT-WISE PERFORMANCE CHART</h3>
+          <div class="chart-wrapper">
+            <canvas id="performanceChart"></canvas>
+          </div>
+        </div>
+        
+        <div class="chart-container">
+          <h3><i class="fas fa-table"></i> SUBJECT PERFORMANCE DATA</h3>
+          <table class="subject-table">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Performance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>dvs</td>
+                <td>41%</td>
+              </tr>
+              <tr>
+                <td>vpn</td>
+                <td>57%</td>
+              </tr>
+              <tr>
+                <td>nvmx</td>
+                <td>33%</td>
+              </tr>
+              <tr>
+                <td>c</td>
+                <td>70%</td>
+              </tr>
+              <tr>
+                <td>n.vmx</td>
+                <td>38%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="report-footer">
+        <p>Generated by Royal Technosoft Pvt Ltd</p>
+        <p>Date: October 07, 2025 at 04:37 pm</p>
+      </div>
     </div>
 
-    <script>
-        // Sample interactivity for demonstration
-        document.addEventListener('DOMContentLoaded', function() {
-            // Action button functionality
-            const actionButtons = document.querySelectorAll('.action-btn');
-            
-            actionButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    alert('Viewing report details...');
-                });
-            });
+    <!-- Loading State -->
+    <div *ngIf="!student" class="report-card">
+      <div class="loading-state">
+        <i class="fas fa-spinner"></i>
+        <p>Loading student data...</p>
+      </div>
+    </div>
+  </div>
 
-            // Control buttons functionality
-            const controlButtons = document.querySelectorAll('.control-btn');
-            
-            controlButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const action = this.textContent.trim();
-                    alert(`Action: ${action}`);
-                });
-            });
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize the pie chart
+      const ctx = document.getElementById('performanceChart').getContext('2d');
+      const performanceChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['dvs', 'vpn', 'nvmx', 'c', 'n.vmx'],
+          datasets: [{
+            data: [41, 57, 33, 70, 38],
+            backgroundColor: [
+              '#1e3c72',
+              '#2a5298',
+              '#3498db',
+              '#2ecc71',
+              '#9b59b6'
+            ],
+            borderWidth: 2,
+            borderColor: '#fff'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                padding: 20,
+                usePointStyle: true,
+                font: {
+                  size: 12,
+                  family: 'Poppins',
+                  weight: '500'
+                }
+              }
+            },
+            tooltip: {
+              backgroundColor: 'rgba(30, 60, 114, 0.9)',
+              titleFont: {
+                family: 'Poppins',
+                size: 12
+              },
+              bodyFont: {
+                family: 'Poppins',
+                size: 12
+              },
+              padding: 10,
+              cornerRadius: 8
+            }
+          }
+        }
+      });
+
+      // Add interactivity to buttons
+      const actionButtons = document.querySelectorAll('.action-btn');
+      actionButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const subject = this.closest('tr').querySelector('td:first-child').textContent;
+          alert(`Viewing details for ${subject}`);
         });
-    </script>
+      });
+
+      const controlButtons = document.querySelectorAll('.control-btn');
+      controlButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const action = this.textContent.trim();
+          alert(`Action: ${action}`);
+        });
+      });
+    });
+  </script>
 </body>
 </html>

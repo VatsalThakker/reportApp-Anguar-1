@@ -14,7 +14,7 @@
         <!-- Navigation Bar -->
         <nav class="navbar navbar-expand-lg lux-navbar">
             <div class="container-fluid">
-                <a class="navbar-brand lux-navbar-brand" href="#">
+                <a class="navbar-brand lux-navbar-brand" routerLink="/dashboard">
                     <i class="fas fa-graduation-cap"></i> MyApp
                 </a>
                 <button class="navbar-toggler lux-navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,31 +28,36 @@
                     <ul class="navbar-nav me-auto">
                         <!-- Student Dropdown -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle"   data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" routerLink="/students"  data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user-graduate"></i> Student
                             </a>
                             <ul class="dropdown-menu lux-dropdown-menu">
-                                <li><a class="dropdown-item lux-dropdown-item" href="#"><i class="fas fa-plus-circle"></i> Add Student</a></li>
-                                <li><a class="dropdown-item lux-dropdown-item" href="#"><i class="fas fa-list"></i> List Student</a></li>
+                                <li><a class="dropdown-item lux-dropdown-item" routerLink="/addstudent"><i class="fas fa-plus-circle"></i> Add Student</a></li>
+                                <li><a class="dropdown-item lux-dropdown-item" routerLink="/students"><i class="fas fa-list"></i> All Student</a></li>
+                                <li><a class="dropdown-item lux-dropdown-item" routerLink="/myresult"><i class="fas fa-list"></i> My Student</a></li>
                             </ul>
                         </li>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         
                             
-                            
-
+                        <!-- <a class="nav-link"  role="button" data-bs-toggle="dropdown" aria-expanded="false" routerLink="/myresult">
+                            My Student
+                          </a>    -->
+                        
                         <!-- Report Dropdown -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#"  data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" routerLink="/students"  data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-chart-bar"></i> Report
                             </a>
                             <ul class="dropdown-menu lux-dropdown-menu">
-                                <li><a class="dropdown-item lux-dropdown-item" href="#"><i class="fas fa-file-alt"></i> Report List</a></li>
+                                <li><a class="dropdown-item lux-dropdown-item" routerLink="/students"><i class="fas fa-file-alt"></i> Report List</a></li>
+                                <li><a class="dropdown-item lux-dropdown-item" routerLink="/searchreport"><i class="fas fa-file-alt"></i>Search Student</a></li> 
                             </ul>
                         </li>
                     </ul>
-                    <button class="btn lux-logout-btn">
+                    <button class="btn lux-logout-btn" (click)="logout()">
                         <i class="fas fa-sign-out-alt"></i> Logout
+                        <!-- <a class="fas fa-sign-out-alt" >Logout</a> -->
                     </button>
                 </div>
             </div>
@@ -64,3 +69,4 @@
          
 </body>
 </html>
+<!-- dont change any tag or logics onlymake it responsive it could fit all size devices -->

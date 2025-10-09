@@ -18,17 +18,7 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
     @Inject(DOCUMENT) private document: Document
   ) {}
 
-  logout() {
-    // Clear session/local storage
-    localStorage.clear();
-    sessionStorage.clear();
-
-    // Optionally show a message
-    alert('Logged out successfully.');
-
-    // Redirect to login page
-    this.router.navigate(['/login']);
-  }
+  
 
   ngAfterViewInit(): void {
     // attach click listeners to your dropdown toggles (works with <p class="nav-link dropdown-toggle">)
@@ -155,5 +145,10 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
       const t = open.querySelector('.dropdown-toggle');
       t?.setAttribute('aria-expanded', 'false');
     });
+  }
+  logout()
+  {
+    localStorage.clear()
+    this.router.navigateByUrl("/login")
   }
 }

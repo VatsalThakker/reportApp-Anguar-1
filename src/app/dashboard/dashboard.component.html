@@ -479,31 +479,24 @@
                             <div class="stat-icon">
                                 <i class="fas fa-user-graduate"></i>
                             </div>
-                            <div class="stat-value">1,254</div>
+                            <div class="stat-value">{{this.data1.student || 0}}</div>
                             <div class="stat-label">Students</div>
-                            <div class="stat-change positive">
-                                <i class="fas fa-arrow-up"></i> 12% from last month
-                            </div>
+                           
                         </div>
                         <div class="stat-item">
                             <div class="stat-icon">
                                 <i class="fas fa-chalkboard-teacher"></i>
                             </div>
-                            <div class="stat-value">84</div>
-                            <div class="stat-label">Faculty</div>
-                            <div class="stat-change positive">
-                                <i class="fas fa-arrow-up"></i> 5% from last month
-                            </div>
+                            <div class="stat-value">{{data1.mystudent || 0}}</div>
+                            <div class="stat-label">My Student</div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-icon">
                                 <i class="fas fa-file-alt"></i>
                             </div>
-                            <div class="stat-value">562</div>
+                            <div class="stat-value">{{this.data1.report || 0}}</div>
                             <div class="stat-label">Reports</div>
-                            <div class="stat-change positive">
-                                <i class="fas fa-arrow-up"></i> 23% from last month
-                            </div>
+                            
                         </div>
                         <div class="stat-item">
                             <div class="stat-icon">
@@ -519,47 +512,7 @@
                 </div>
 
                 <!-- Recent Activity -->
-                <div class="activity-section">
-                    <h2 class="section-title"><i class="fas fa-history"></i> Recent Activity</h2>
-                    <div class="activity-list">
-                        <div class="activity-item">
-                            <div class="activity-icon student">
-                                <i class="fas fa-user-plus"></i>
-                            </div>
-                            <div class="activity-details">
-                                <div class="activity-title">New student registered</div>
-                                <div class="activity-time">10 minutes ago</div>
-                            </div>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-icon faculty">
-                                <i class="fas fa-user-edit"></i>
-                            </div>
-                            <div class="activity-details">
-                                <div class="activity-title">Faculty profile updated</div>
-                                <div class="activity-time">45 minutes ago</div>
-                            </div>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-icon report">
-                                <i class="fas fa-file-medical"></i>
-                            </div>
-                            <div class="activity-details">
-                                <div class="activity-title">New report generated</div>
-                                <div class="activity-time">2 hours ago</div>
-                            </div>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-icon student">
-                                <i class="fas fa-user-graduate"></i>
-                            </div>
-                            <div class="activity-details">
-                                <div class="activity-title">Student progress updated</div>
-                                <div class="activity-time">5 hours ago</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
 
             <!-- Sidebar -->
@@ -577,43 +530,16 @@
                         <button class="action-btn" routerLink="/students">
                             <i class="fas fa-file-alt"></i> Generate Report
                         </button>
-                        <button class="action-btn">
-                            <i class="fas fa-chart-pie"></i> View Analytics
+                        <button class="action-btn" routerLink="/searchreport">
+                            <i class="fas fa-chart-pie"></i> search Reports
                         </button>
                     </div>
                 </div>
 
-                <!-- Progress Section -->
-                <div class="progress-section">
-                    <h2 class="section-title"><i class="fas fa-tasks"></i> Progress</h2>
-                    <div class="progress-item">
-                        <div class="progress-header">
-                            <span class="progress-label">Student Registration</span>
-                            <span class="progress-value">75%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill students"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-header">
-                            <span class="progress-label">Faculty Onboarding</span>
-                            <span class="progress-value">60%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill faculty"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-header">
-                            <span class="progress-label">Report Completion</span>
-                            <span class="progress-value">85%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill reports"></div>
-                        </div>
-                    </div>
-                </div>
+                
+                    
+                    
+                
             </div>
         </div>
     </div>

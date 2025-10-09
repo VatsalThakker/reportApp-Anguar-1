@@ -1,11 +1,12 @@
 import { NgIf, NgFor, CommonModule } from '@angular/common'; // ✅ include CommonModule
-import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+ import { Component, Injectable } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { StudentServiceService } from '../services/student-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { HttpClientModule } from '@angular/common/http';
 
+ 
 @Component({
   selector: 'app-student-list',
   standalone: true, // ✅ Required if this is a standalone component
