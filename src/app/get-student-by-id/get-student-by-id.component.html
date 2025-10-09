@@ -18,7 +18,7 @@
     body {
       background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       min-height: 100vh;
-      padding: 20px;
+      padding: 15px;
       color: #333;
     }
 
@@ -31,7 +31,7 @@
     .report-card {
       background: #fff;
       border-radius: 16px;
-      padding: 40px;
+      padding: 30px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
       position: relative;
       overflow: hidden;
@@ -58,7 +58,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) rotate(-45deg);
-      font-size: 120px;
+      font-size: 100px;
       font-weight: 900;
       color: rgba(30, 60, 114, 0.03);
       z-index: 0;
@@ -69,8 +69,8 @@
     /* Header Section */
     .report-header {
       text-align: center;
-      margin-bottom: 40px;
-      padding-bottom: 25px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
       border-bottom: 2px solid rgba(42, 82, 152, 0.1);
       position: relative;
       z-index: 1;
@@ -79,8 +79,8 @@
     .company-name {
       color: #1e3c72;
       font-weight: 800;
-      font-size: 32px;
-      margin-bottom: 10px;
+      font-size: 28px;
+      margin-bottom: 8px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
     }
@@ -88,31 +88,31 @@
     .report-title {
       color: #2a5298;
       font-weight: 600;
-      font-size: 24px;
-      margin-bottom: 15px;
+      font-size: 22px;
+      margin-bottom: 12px;
     }
 
     .academic-year {
       display: inline-block;
       background: rgba(30, 60, 114, 0.1);
-      padding: 8px 20px;
+      padding: 6px 16px;
       border-radius: 20px;
       color: #1e3c72;
       font-weight: 500;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     /* Student Info Card */
     .student-info-card {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 16px;
-      padding: 35px;
-      margin-bottom: 40px;
+      padding: 25px;
+      margin-bottom: 30px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
       border: 1px solid rgba(42, 82, 152, 0.1);
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: 35px;
+      gap: 25px;
       align-items: center;
       position: relative;
       z-index: 1;
@@ -130,8 +130,8 @@
     }
 
     .profile-pic {
-      width: 170px;
-      height: 170px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       object-fit: cover;
       border: 6px solid rgba(30, 60, 114, 0.1);
@@ -145,15 +145,15 @@
     }
 
     .profile-placeholder {
-      width: 170px;
-      height: 170px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 60px;
+      font-size: 50px;
       border: 6px solid rgba(30, 60, 114, 0.1);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
@@ -165,27 +165,27 @@
     }
 
     .student-id {
-      margin-top: 15px;
-      padding: 8px 15px;
+      margin-top: 12px;
+      padding: 6px 12px;
       background: rgba(30, 60, 114, 0.1);
       border-radius: 10px;
       color: #1e3c72;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .student-details {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 15px;
     }
 
     .detail-item {
       display: flex;
       flex-direction: column;
-      padding: 18px;
+      padding: 15px;
       background: rgba(255, 255, 255, 0.7);
-      border-radius: 14px;
+      border-radius: 12px;
       border-left: 4px solid #1e3c72;
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
@@ -199,45 +199,53 @@
 
     .detail-label {
       color: #2a5298;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
     }
 
     .detail-label i {
-      margin-right: 10px;
-      font-size: 16px;
-      width: 20px;
+      margin-right: 8px;
+      font-size: 14px;
+      width: 18px;
       text-align: center;
     }
 
     .detail-value {
       color: #1e3c72;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
     }
 
-    /* Table Styles */
+    /* Table Section */
     .table-section {
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       position: relative;
       z-index: 1;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
     .section-title {
       color: #1e3c72;
       font-weight: 700;
-      font-size: 26px;
-      margin-bottom: 25px;
+      font-size: 22px;
       display: flex;
       align-items: center;
     }
 
     .section-title i {
-      margin-right: 12px;
-      font-size: 28px;
+      margin-right: 10px;
+      font-size: 24px;
       background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       -webkit-background-clip: text;
       background-clip: text;
@@ -246,22 +254,22 @@
 
     .section-controls {
       display: flex;
-      gap: 15px;
+      gap: 12px;
     }
 
     .control-btn {
       background: rgba(255, 255, 255, 0.9);
       border: 1px solid rgba(42, 82, 152, 0.2);
       border-radius: 10px;
-      padding: 10px 18px;
+      padding: 8px 15px;
       color: #2a5298;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
     }
 
@@ -272,22 +280,26 @@
     }
 
     .control-btn i {
-      font-size: 14px;
+      font-size: 13px;
     }
 
+    /* Responsive Table Container */
     .reports-table-container {
       background: rgba(255, 255, 255, 0.9);
-      border-radius: 18px;
+      border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
       border: 1px solid rgba(42, 82, 152, 0.1);
       position: relative;
+      width: 100%;
+      overflow-x: auto;
     }
 
     .report-table {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 0;
+      min-width: 900px; /* Ensures table doesn't break on small screens */
     }
 
     .report-table thead {
@@ -297,12 +309,13 @@
     .report-table th {
       color: white;
       font-weight: 600;
-      padding: 18px 15px;
+      padding: 15px 12px;
       text-align: left;
-      font-size: 14px;
+      font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       position: relative;
+      white-space: nowrap;
     }
 
     .report-table th:not(:last-child)::after {
@@ -330,17 +343,18 @@
     }
 
     .report-table td {
-      padding: 16px 15px;
+      padding: 14px 12px;
       color: #2a5298;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
+      white-space: nowrap;
     }
 
     .action-btn {
       background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       border: none;
-      border-radius: 10px;
-      padding: 10px 18px;
+      border-radius: 8px;
+      padding: 8px 15px;
       color: white;
       font-size: 12px;
       font-weight: 600;
@@ -348,7 +362,7 @@
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       box-shadow: 0 4px 10px rgba(30, 60, 114, 0.2);
       letter-spacing: 0.5px;
       text-decoration: none;
@@ -360,13 +374,13 @@
     }
 
     .action-btn i {
-      font-size: 12px;
+      font-size: 11px;
     }
 
     /* Academic Summary */
     .academic-summary {
-      margin-bottom: 40px;
-      padding: 25px;
+      margin-bottom: 30px;
+      padding: 20px;
       background: #f9f9f9;
       border-radius: 16px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
@@ -378,15 +392,15 @@
     .academic-summary h3 {
       color: #1e3c72;
       font-weight: 700;
-      font-size: 26px;
-      margin-bottom: 25px;
+      font-size: 22px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
     }
 
     .academic-summary h3 i {
-      margin-right: 12px;
-      font-size: 28px;
+      margin-right: 10px;
+      font-size: 24px;
       background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       -webkit-background-clip: text;
       background-clip: text;
@@ -395,15 +409,15 @@
 
     .summary-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 15px;
     }
 
     .summary-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px;
+      padding: 15px;
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.03);
@@ -418,13 +432,13 @@
 
     .summary-label {
       color: #666;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
     }
 
     .summary-value {
       color: #1e3c72;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
     }
 
@@ -432,8 +446,8 @@
     .performance-chart-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-bottom: 40px;
+      gap: 25px;
+      margin-bottom: 30px;
       position: relative;
       z-index: 1;
     }
@@ -441,7 +455,7 @@
     .chart-container {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 16px;
-      padding: 25px;
+      padding: 20px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
       border: 1px solid rgba(42, 82, 152, 0.1);
       display: flex;
@@ -451,15 +465,15 @@
     .chart-container h3 {
       color: #1e3c72;
       font-weight: 700;
-      font-size: 22px;
-      margin-bottom: 20px;
+      font-size: 20px;
+      margin-bottom: 15px;
       display: flex;
       align-items: center;
     }
 
     .chart-container h3 i {
-      margin-right: 10px;
-      font-size: 24px;
+      margin-right: 8px;
+      font-size: 22px;
       background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       -webkit-background-clip: text;
       background-clip: text;
@@ -471,7 +485,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 300px;
+      min-height: 250px;
     }
 
     .subject-table {
@@ -487,15 +501,15 @@
     .subject-table th {
       color: white;
       font-weight: 600;
-      padding: 12px 15px;
+      padding: 10px 12px;
       text-align: left;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .subject-table td {
-      padding: 10px 15px;
+      padding: 8px 12px;
       border-bottom: 1px solid rgba(42, 82, 152, 0.1);
-      font-size: 14px;
+      font-size: 13px;
       color: #2a5298;
     }
 
@@ -510,16 +524,16 @@
     /* Footer */
     .report-footer {
       text-align: center;
-      padding-top: 25px;
+      padding-top: 20px;
       border-top: 1px solid rgba(42, 82, 152, 0.1);
       color: #666;
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.6;
       position: relative;
       z-index: 1;
     }
 
-    /* Responsive Adjustments */
+    /* Responsive Adjustments for 8-inch tablets and smaller */
     @media (max-width: 1200px) {
       .performance-chart-section {
         grid-template-columns: 1fr;
@@ -530,36 +544,54 @@
       .student-info-card {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 20px;
       }
+      
       .student-details {
         grid-template-columns: 1fr;
+      }
+      
+      .profile-pic, .profile-placeholder {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .profile-placeholder {
+        font-size: 40px;
       }
     }
 
     @media (max-width: 768px) {
       .report-card {
-        padding: 25px 20px;
+        padding: 20px 15px;
       }
+      
+      .company-name {
+        font-size: 24px;
+      }
+      
       .report-title {
         font-size: 20px;
       }
-      .company-name {
-        font-size: 26px;
+      
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
       }
-      .profile-pic, .profile-placeholder {
-        width: 120px;
-        height: 120px;
-      }
+      
       .section-controls {
         width: 100%;
         justify-content: flex-start;
         flex-wrap: wrap;
         gap: 10px;
       }
-      .report-table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
+      
+      .summary-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      }
+      
+      .watermark {
+        font-size: 70px;
       }
     }
 
@@ -567,21 +599,35 @@
       body {
         padding: 10px;
       }
+      
       .report-card {
-        padding: 20px 15px;
+        padding: 15px 10px;
       }
+      
+      .company-name {
+        font-size: 20px;
+      }
+      
       .report-title {
         font-size: 18px;
       }
-      .company-name {
-        font-size: 22px;
-      }
+      
       .student-info-card {
-        padding: 20px;
+        padding: 15px;
       }
+      
       .detail-item {
-        padding: 12px;
+        padding: 12px 10px;
       }
+      
+      .detail-label, .detail-value {
+        font-size: 12px;
+      }
+      
+      .section-title {
+        font-size: 18px;
+      }
+      
       .report-table th,
       .report-table td,
       .subject-table th,
@@ -589,26 +635,55 @@
         padding: 10px 8px;
         font-size: 12px;
       }
+      
       .action-btn,
       .control-btn {
-        padding: 8px 12px;
-        font-size: 12px;
+        padding: 6px 10px;
+        font-size: 11px;
       }
+      
       .watermark {
-        font-size: 60px;
+        font-size: 50px;
+      }
+      
+      .chart-wrapper {
+        min-height: 200px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .company-name {
+        font-size: 18px;
+      }
+      
+      .report-title {
+        font-size: 16px;
+      }
+      
+      .profile-pic, .profile-placeholder {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .profile-placeholder {
+        font-size: 30px;
+      }
+      
+      .summary-grid {
+        grid-template-columns: 1fr;
       }
     }
 
     /* Loading State */
     .loading-state {
       text-align: center;
-      padding: 60px 20px;
+      padding: 50px 20px;
       color: #2a5298;
     }
 
     .loading-state i {
-      font-size: 40px;
-      margin-bottom: 20px;
+      font-size: 35px;
+      margin-bottom: 15px;
       color: #1e3c72;
       animation: spin 1.5s linear infinite;
     }
@@ -619,25 +694,25 @@
     }
 
     .loading-state p {
-      font-size: 18px;
+      font-size: 16px;
       opacity: 0.8;
     }
 
     /* Empty State */
     .empty-state {
       text-align: center;
-      padding: 60px 20px;
+      padding: 50px 20px;
       color: #2a5298;
     }
 
     .empty-state i {
-      font-size: 60px;
-      margin-bottom: 20px;
+      font-size: 50px;
+      margin-bottom: 15px;
       opacity: 0.5;
     }
 
     .empty-state p {
-      font-size: 18px;
+      font-size: 16px;
       opacity: 0.7;
       margin-bottom: 15px;
     }
@@ -880,10 +955,10 @@
             legend: {
               position: 'bottom',
               labels: {
-                padding: 20,
+                padding: 15,
                 usePointStyle: true,
                 font: {
-                  size: 12,
+                  size: 11,
                   family: 'Poppins',
                   weight: '500'
                 }
@@ -893,14 +968,14 @@
               backgroundColor: 'rgba(30, 60, 114, 0.9)',
               titleFont: {
                 family: 'Poppins',
-                size: 12
+                size: 11
               },
               bodyFont: {
                 family: 'Poppins',
-                size: 12
+                size: 11
               },
-              padding: 10,
-              cornerRadius: 8
+              padding: 8,
+              cornerRadius: 6
             }
           }
         }
