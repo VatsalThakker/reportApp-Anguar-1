@@ -16,24 +16,25 @@ import { UpdateReportComponent } from './update-report/update-report.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ViewReportSearchComponent } from './view-report-search/view-report-search.component';
+import { logincheckGuard } from './logincheck.guard';
 
 export const routes: Routes = [
     {path:'login',component:LoginComponent},
     {path:'',component:LoginComponent},
-    {path:'addstudent',component:AddStudentComponent},
-    {path:'addfaculty',component:AddFacultyComponent},
-    {path:'students',component:StudentListComponent},
-    {path: 'editstudent/:id',component: UpdateStudentComponent },
-    {path: 'viewstudent/:id',component: ViewStudentComponent },
-    {path: 'faculties',component: FacultyListComponent },
-    {path: 'viewfaculty/:id',component: GetFacultyCompenent },
-    {path: 'editfaculty/:id',component: UpdateFacultyComponent },
-    {path:'addreport/:id',component:AddReportComponent},
-    {path:'getreport/:id',component:GetReportComponent},
-    {path:'myresult',component:FacultyStudentsComponent},
-    {path:'reportlist',component:ReportListComponent},
-    {path:'editreport/:id',component:UpdateReportComponent},
-    {path:'dashboard',component:DashboardComponent},
-    {path:'nav',component:NavbarComponent},
-    {path:'searchreport',component:ViewReportSearchComponent}
+    {path:'addstudent',component:AddStudentComponent,canActivate:[logincheckGuard]},
+    {path:'addfaculty',component:AddFacultyComponent,canActivate:[logincheckGuard]},
+    {path:'students',component:StudentListComponent,canActivate:[logincheckGuard]},
+    {path: 'editstudent/:id',component: UpdateStudentComponent,canActivate:[logincheckGuard]},
+    {path: 'viewstudent/:id',component: ViewStudentComponent,canActivate:[logincheckGuard]},
+    {path: 'faculties',component: FacultyListComponent,canActivate:[logincheckGuard]},
+    {path: 'viewfaculty/:id',component: GetFacultyCompenent,canActivate:[logincheckGuard]},
+    {path: 'editfaculty/:id',component: UpdateFacultyComponent,canActivate:[logincheckGuard]},
+    {path:'addreport/:id',component:AddReportComponent,canActivate:[logincheckGuard]},
+    {path:'getreport/:id',component:GetReportComponent,canActivate:[logincheckGuard]},
+    {path:'myresult',component:FacultyStudentsComponent,canActivate:[logincheckGuard]},
+    {path:'reportlist',component:ReportListComponent,canActivate:[logincheckGuard]},
+    {path:'editreport/:id',component:UpdateReportComponent,canActivate:[logincheckGuard]},
+    {path:'dashboard',component:DashboardComponent,canActivate:[logincheckGuard]},
+    {path:'nav',component:NavbarComponent,canActivate:[logincheckGuard]},
+    {path:'searchreport',component:ViewReportSearchComponent,canActivate:[logincheckGuard]}
 ];

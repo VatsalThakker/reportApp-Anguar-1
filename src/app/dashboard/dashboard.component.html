@@ -447,6 +447,12 @@
                 padding: 20px;
             }
         }
+        .stats a.stat-item {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
     </style>
 </head>
 <body>
@@ -472,35 +478,30 @@
                 </div>
 
                 <!-- Stats Section -->
-                <div class="stats-section">
-                    <h2 class="section-title"><i class="fas fa-chart-bar"></i> Overview</h2>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <div class="stat-icon">
-                                <i class="fas fa-user-graduate"></i>
-                            </div>
-                            <div class="stat-value">{{this.data1.student || 0}}</div>
-                            <div class="stat-label">Students</div>
-                           
+                <div class="stats">
+                    <a class="stat-item" routerLink="/students">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-graduate"></i>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-icon">
-                                <i class="fas fa-chalkboard-teacher"></i>
-                            </div>
-                            <div class="stat-value">{{data1.mystudent || 0}}</div>
-                            <div class="stat-label">My Student</div>
+                        <div class="stat-value">{{this.data1.student || 0}}</div>
+                        <div class="stat-label">Students</div>
+                    </a>
+                    <a class="stat-item" routerLink="/myresult">
+                        <div class="stat-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-icon">
-                                <i class="fas fa-file-alt"></i>
-                            </div>
-                            <div class="stat-value">{{this.data1.report || 0}}</div>
-                            <div class="stat-label">Reports</div>
-                            
+                        <div class="stat-value">{{data1.mystudent || 0}}</div>
+                        <div class="stat-label">My Student</div>
+                    </a>
+                    <a class="stat-item" routerLink="/reports">
+                        <div class="stat-icon">
+                            <i class="fas fa-file-alt"></i>
                         </div>
-                    
-                    </div>
+                        <div class="stat-value">{{this.data1.report || 0}}</div>
+                        <div class="stat-label">Reports</div>
+                    </a>
                 </div>
+                
 
                 <!-- Recent Activity -->
                 

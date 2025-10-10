@@ -5,6 +5,7 @@ import { StudentServiceService } from '../services/student-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
  
 @Component({
@@ -22,10 +23,16 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class StudentListComponent {
   data: Array<any> = [];
+  searchForm: FormGroup;
   
 
-  constructor(private student: StudentServiceService, private t: ToastrService,private router: Router ) {
+  constructor(private student: StudentServiceService, private t: ToastrService,private router: Router ,private fb: FormBuilder) {
     this.getAllStudent();
+
+    //new
+    this.searchForm = this.fb.group({
+      name: ['']
+    });
   }
 
   getAllStudent() {
@@ -63,5 +70,35 @@ export class StudentListComponent {
   }
   viewStudent(id: string) {
     this.router.navigate(['/viewstudent', id]);
+  }
+
+
+  onSearch() {
+    const name = this.searchForm.get('name')?.value?.trim();
+    console.log('inside search, name:', name);
+
+    if (name !== '') {
+      this.student.search({ name }).subscribe({
+        // next: (data) => {
+        //   console.log('Response:', data);
+
+        //   // If backend returns a single object, wrap it into an array
+        //   this.data = Array.isArray(data) ? data : [data];
+
+        //   // Optional: combine firstName + lastName into name
+        //   this.data = this.data.map(s => ({
+        //     ...s,
+        //     name: `${s.firstName} ${s.lastName}`
+        //   }));
+
+        //   this.searched = true;
+        // },
+        // error: (err) => {
+        //   console.error('Error:', err);
+        //   this.students = [];
+        //   this.searched = true;
+        // }
+      });
+    }
   }
 }

@@ -33,6 +33,7 @@ export class LoginComponent {
     this.auth.login(this.loginForm.value).subscribe(resp => {
       console.log(resp);
       localStorage.setItem("facultyId",resp.user.id)
+      localStorage.setItem("firstName",resp.user.firstName)
       this.loginText = "Login"
       this.router.navigateByUrl("/dashboard")
     },err => {
