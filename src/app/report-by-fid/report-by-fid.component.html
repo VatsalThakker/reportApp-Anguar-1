@@ -379,10 +379,17 @@
                     <p class="table-subtitle">Manage all student records in one place</p>
                 </div>
                 <div class="table-controls">
-                    <div class="search-box">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="text" class="search-input" placeholder="Search students...">
-                    </div>
+                    <form [formGroup]="searchForm">
+                        <div class="search-box">
+                          <i class="fas fa-search search-icon"></i>
+                          <input
+                            type="text"
+                            class="search-input"
+                            formControlName="name"
+                            placeholder="Enter student name..."
+                          />
+                        </div>
+                      </form>
                 </div>
             </div>
 
@@ -390,8 +397,7 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
+                  <th>Name</th>
                   <th>Email</th>
                   <th>Gender</th>
                   <th>Batch</th>
@@ -404,8 +410,7 @@
               <tbody>
                 <tr *ngFor="let student of students; let i = index">
                   <td>{{ i + 1 }}</td>
-                  <td>{{ student.firstName }}</td>
-                  <td>{{ student.lastName }}</td>
+                  <td>{{ student.firstName }} {{ student.lastName }}</td>
                   <td>{{ student.email }}</td>
                   <td>{{ student.gender }}</td>
                   <td>{{ student.batch }}</td>

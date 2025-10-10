@@ -320,32 +320,31 @@
 </head>
 <body>
     <div class="container">
-        <!-- Your Original Angular Structure with Enhanced UI -->
         <app-navbar></app-navbar>
+      
         <div class="search-container">
-            <h2>Search Student</h2>
-
-            <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
-                <input type="text"
-                    formControlName="name"
-                    placeholder="Enter student name..."
-                    (keyup)="onSearch()" />
-
-                <button type="submit">
-                    <i class="fas fa-search"></i> Search
-                </button>
-            </form>
-
-            <ul *ngIf="students.length > 0">
-                <li *ngFor="let student of students" (click)="openReport(student._id)">
-                    {{ student.name }} ({{ student.email }})
-                </li>
-            </ul>
-
-            <p *ngIf="students.length === 0 && searched">No students found.</p>
+          <h2>Search Student</h2>
+      
+          <form [formGroup]="searchForm">
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Enter student name..."
+            />
+          </form>
+      
+          <ul *ngIf="students.length > 0">
+            <li *ngFor="let student of students" (click)="openReport(student._id)">
+              {{ student.firstName }} {{ student.lastName }} ({{ student.email }})
+            </li>
+          </ul>
+      
+          <p *ngIf="students.length === 0 && searched">
+            No students found.
+          </p>
         </div>
-    </div>
-
+      </div>
+      
     <script>
         // Sample script for demonstration purposes
         document.addEventListener('DOMContentLoaded', function() {
