@@ -16,6 +16,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 export class ViewStudentComponent {
   student: any = null;
   reports: any[] = [];
+  data :any 
 
   constructor(private router: Router,private route: ActivatedRoute, private studentService: StudentServiceService) {
     const id = this.route.snapshot.params['id'];
@@ -23,6 +24,9 @@ export class ViewStudentComponent {
     this.studentService.studentReport(id).subscribe(resp => {
       this.student = resp.studentDetails[0];
       this.reports = resp.reportDetails;
+      this.data=resp
+      console.log(resp);
+      
     }, err => {
       console.error('Error fetching student details:', err);
     });

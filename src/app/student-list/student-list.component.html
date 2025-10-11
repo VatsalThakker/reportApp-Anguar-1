@@ -403,8 +403,6 @@
                 <tr>
                   <th>#</th>
                   <th>Name</th>
-                  <th>Email</th>
-                  <th>Gender</th>
                   <th>Batch</th>
                   <th>College</th>
                   <th>Branch</th>
@@ -416,8 +414,6 @@
                 <tr *ngFor="let student of data; let i = index">
                   <td>{{ i + 1 }}</td>
                   <td>{{ student.firstName }} {{ student.lastName }}</td>
-                  <td>{{ student.email }}</td>
-                  <td>{{ student.gender }}</td>
                   <td>{{ student.batch }}</td>
                   <td>{{ student.collegeName }}</td>
                   <td>{{ student.branch }}</td>
