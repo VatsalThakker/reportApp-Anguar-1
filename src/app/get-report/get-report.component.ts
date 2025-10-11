@@ -16,6 +16,9 @@ export class GetReportComponent {
   report: any;
   reportId: string = '';
   sid : string =''
+  per :string =''
+  total :string =''
+  sstatus:string =''
 
   constructor(
     private route: ActivatedRoute,
@@ -34,11 +37,20 @@ export class GetReportComponent {
         this.report = res.data[0];
         this.sid=res.data[0].student_id._id
         console.log(res.data[0])
+        this.report.total = this.report.regularity + this.report.discipline + this.report.communication + this.report.test
+        this.report.per = (this.report.total/20) *100
+        this.report.sstatus = this.getStatus(this.report.per);
       },
       error: (err) => {
         console.error('Error fetching report:', err);
       }
     });
+  }
+  getStatus(per: number): string {
+    if (per > 75) return 'Excellent';
+    if (per > 50) return 'Very Good';
+    if (per > 25) return 'Good';
+    return 'Needs Improvement';
   }
   openReport() {
     this.router.navigate(['/viewstudent/'+this.sid]);

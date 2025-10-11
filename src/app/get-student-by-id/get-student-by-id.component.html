@@ -192,9 +192,9 @@
         <div class="student-details">
           <div class="detail-item"><span class="detail-label"><i class="fas fa-user">&nbsp;</i></span><span class="detail-value">{{ student.firstName }} {{ student.lastName }}</span></div>
           <div class="detail-item"><span class="detail-label"><i class="fas fa-envelope">&nbsp;</i></span><span class="detail-value" style="text-wrap: wrap;">{{ student.email }}</span></div>
-          <div class="detail-item"><span class="detail-label"><i class="fas fa-code-branch">&nbsp;</i></span><span class="detail-value">{{ student.branch }}</span></div>
+          <div class="detail-item"><span class="detail-label"><i class="fas fa-code-branch">&nbsp;</i></span><span class="detail-value">{{ student.branch || 'Ahmedabad'}}</span></div>
           <div class="detail-item"><span class="detail-label"><i class="fas fa-users"></i>&nbsp;</span><span class="detail-value">{{ student.batch }}</span></div>
-          <div class="detail-item"><span class="detail-label"><i class="fas fa-university">&nbsp;</i></span><span class="detail-value">{{ student.collegeName }}</span></div>
+          <div class="detail-item"><span class="detail-label"><i class="fas fa-university">&nbsp;</i></span><span class="detail-value">{{ student.collegeName || 'N/A' }}</span></div>
           <div class="detail-item"><span class="detail-label"><i class="fas fa-phone"></i>&nbsp;</span><span class="detail-value">{{ student.contactNo }}</span></div>
         </div>
        </div> 
@@ -255,11 +255,11 @@
         <div class="summary-grid">
           <div class="summary-item">
             <span class="summary-label">Overall Percentage</span>
-            <span class="summary-value">{{data.overallPercentage}}</span>
+            <span class="summary-value">{{overallPercentage}}</span>
             <!-- {{ overallPercentage }}% -->
             <div class="progress-bar-container"><div class="progress-bar"></div></div>
           </div>
-          <div class="summary-item"><span class="summary-label">Overall Status</span><span class="summary-value">{{data.sstatus}}</span></div>
+          <div class="summary-item"><span class="summary-label">Overall Status</span><span class="summary-value">{{overallStatus}}</span></div>
           <div class="summary-item"><span class="summary-label">Total Subjects</span><span class="summary-value">{{data.subjectCount}}</span></div>
           <!-- {{ totalSubjects }} -->
           <!-- {{ overallStatus }} -->
