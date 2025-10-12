@@ -1,0 +1,28 @@
+<section class="delete-page" aria-labelledby="delete-heading">
+    <h1 id="delete-heading">Request Data Removal from Report App</h1>
+  
+    <p class="lead">
+      Enter the email address used on the Play Store account.
+    </p>
+  
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <label for="email">Email address</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="name@example.com"
+        autocomplete="email"
+      />
+  
+      <div class="error" *ngIf="email?.invalid && (email?.touched || email?.dirty)">
+        <div *ngIf="email?.errors?.required">Email is required.</div>
+        <div *ngIf="email?.errors?.email">Please enter a valid email.</div>
+      </div>
+  
+      <div class="actions">
+        <button type="submit">Enter</button>
+      </div>
+    </form>
+  </section>
+  
