@@ -18,6 +18,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ViewReportSearchComponent } from './view-report-search/view-report-search.component';
 import { logincheckGuard } from './logincheck.guard';
 import { DeleteAppComponent } from './delete-app/delete-app.component';
+import { SignupComponent } from './signup/signup.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 export const routes: Routes = [
     {path:'login',component:LoginComponent},
@@ -38,5 +40,7 @@ export const routes: Routes = [
     {path:'dashboard',component:DashboardComponent,canActivate:[logincheckGuard]},
     {path:'nav',component:NavbarComponent,canActivate:[logincheckGuard]},
     {path:'searchreport',component:ViewReportSearchComponent,canActivate:[logincheckGuard]},
-    {path:'delete',component:DeleteAppComponent}
+    {path:'delete',component:DeleteAppComponent},
+    {path:'signup',component:SignupComponent},
+    {path:'welcome',component:WelcomeComponent}
 ];

@@ -1,0 +1,66 @@
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .welcome-card {
+    background: white;
+    padding: 2.5rem 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 480px;
+  }
+  
+  h1 {
+    color: #1e88e5;
+    margin-bottom: 0.8rem;
+    font-size: 2rem;
+  }
+  
+  .message {
+    color: #444;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: 0.3s ease;
+  }
+  
+  .btn-primary {
+    background: #1e88e5;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background: #1565c0;
+  }
+  
+  .btn-secondary {
+    background: #f1f1f1;
+    color: #333;
+  }
+  
+  .btn-secondary:hover {
+    background: #e0e0e0;
+  }
+  
