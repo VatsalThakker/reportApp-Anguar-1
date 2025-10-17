@@ -63,7 +63,7 @@ export class SignupComponent {
         this.submitText = 'Submit';
         console.log(res);
         
-        this.router.navigateByUrl('/welcome'+res.user._id); // Update route as needed
+        this.router.navigateByUrl('/welcome'); // Update route as needed
       },
       error: (err) => {
         console.error('Error:', err);
