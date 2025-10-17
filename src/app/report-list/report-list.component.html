@@ -1,104 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report List - MyApp</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report List - MyApp</title>
 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #f7f9fb;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 800px;
+    }
+
+    .styled-table th,
+    .styled-table td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .styled-table th {
+      background-color: #007bff;
+      color: #fff;
+      font-weight: 500;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .styled-table tr:nth-child(even) {
+      background-color: #f3f6fa;
+    }
+
+    .percentage-cell.high {
+      color: green;
+      font-weight: 600;
+    }
+
+    .percentage-cell.medium {
+      color: #e6b800;
+      font-weight: 600;
+    }
+
+    .percentage-cell.low {
+      color: red;
+      font-weight: 600;
+    }
+
+    .status-badge {
+      padding: 6px 10px;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .status-excellent {
+      background: #28a745;
+    }
+
+    .action-btn {
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      margin: 3px;
+      transition: 0.2s;
+    }
+
+    .btn-edit {
+      background: #ffc107;
+      color: #000;
+    }
+
+    .btn-delete {
+      background: #dc3545;
+      color: #fff;
+    }
+
+    .btn-view {
+      background: #007bff;
+      color: #fff;
+    }
+
+    .action-btn:hover {
+      opacity: 0.8;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 30px;
+      color: #666;
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    /* ✅ Responsive tweaks */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .styled-table th,
+      .styled-table td {
+        padding: 10px;
+        font-size: 0.9rem;
+      }
+
+      .action-btn {
+        font-size: 0.8rem;
+        padding: 5px 8px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .styled-table {
+        min-width: 600px;
+      }
+
+      .container {
+        padding: 15px;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <app-navbar></app-navbar>
+    <h2>Report List</h2>
 
-    <div class="container">
-        <!-- Your Original Angular Structure with Enhanced UI -->
-        <app-navbar></app-navbar>
-        <h2>Report List</h2>
-        
-        <div class="table-container">
-          <table class="styled-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Student</th>
-                <th>Faculty</th>
-                <th>Subject</th>
-                <th>Discipline</th>
-                <th>Regularity</th>
-                <th>Communication</th>
-                <th>Test</th>
-                <th>Total</th>
-                <th>Percent</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-          
-            <tbody>
-              <tr *ngFor="let r of reports; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>{{ r.student_id?.firstName }} {{ r.student_id?.lastName }}</td>
-                <td>{{ r.faculty_id?.firstName }} {{ r.faculty_id?.lastName }}</td>
-                <td>{{ r.subject }}</td>
-                <td>{{ r.discipline }}</td>
-                <td>{{ r.regularity }}</td>
-                <td>{{ r.communication }}</td>
-                <td>{{ r.test }}</td>
-                <td >{{ r.total || '-' }}</td>
-                <td class="percentage-cell">{{ r.per || '-' }}%</td>
-                <td class="status-badge status-excellent">{{ r.sstatus || '-' }}</td>
-                <td>
-                  <button class="action-btn btn-edit" (click)="editReport(r._id)">✏️ Edit</button>
-                  <button class="action-btn btn-delete" (click)="deleteReport(r._id)">🗑️ Delete</button>
-                  <button class="action-btn btn-view" (click)="viewReport(r._id)">🔍 View</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-            <!-- Empty State (Hidden by default) -->
-            <div class="empty-state" style="display: none;">
-                <i class="fas fa-clipboard-list"></i>
-                <h3>No Reports Found</h3>
-                <p>There are no reports to display at the moment.</p>
-            </div>
-        </div>
+    <div class="table-container">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Student</th>
+            <th>Faculty</th>
+            <th>Subject</th>
+            <th>Discipline</th>
+            <th>Regularity</th>
+            <th>Communication</th>
+            <th>Test</th>
+            <th>Total</th>
+            <th>Percent</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of reports; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ r.student_id?.firstName }} {{ r.student_id?.lastName }}</td>
+            <td>{{ r.faculty_id?.firstName }} {{ r.faculty_id?.lastName }}</td>
+            <td>{{ r.subject }}</td>
+            <td>{{ r.discipline }}</td>
+            <td>{{ r.regularity }}</td>
+            <td>{{ r.communication }}</td>
+            <td>{{ r.test }}</td>
+            <td>{{ r.total || '-' }}</td>
+            <td class="percentage-cell">{{ r.per || '-' }}%</td>
+            <td class="status-badge status-excellent">{{ r.sstatus || '-' }}</td>
+            <td>
+              <button class="action-btn btn-edit" (click)="editReport(r._id)">✏️ Edit</button>
+              <button class="action-btn btn-delete" (click)="deleteReport(r._id)">🗑️ Delete</button>
+              <button class="action-btn btn-view" (click)="viewReport(r._id)">🔍 View</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="empty-state" *ngIf="reports?.length === 0">
+        <i class="fas fa-clipboard-list"></i>
+        <h3>No Reports Found</h3>
+        <p>There are no reports to display at the moment.</p>
+      </div>
     </div>
+  </div>
 
-    <script>
-        // Sample script for demonstration purposes
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add percentage-based coloring
-            const percentageCells = document.querySelectorAll('.percentage-cell');
-            percentageCells.forEach(cell => {
-                const percentage = parseInt(cell.textContent);
-                if (percentage >= 80) {
-                    cell.classList.add('high');
-                } else if (percentage >= 60) {
-                    cell.classList.add('medium');
-                } else {
-                    cell.classList.add('low');
-                }
-            });
-            
-            // Add click handlers for buttons (would be handled by Angular in real app)
-            document.querySelectorAll('.btn-edit').forEach(button => {
-                button.addEventListener('click', function() {
-                    console.log('Edit button clicked');
-                });
-            });
-            
-            document.querySelectorAll('.btn-delete').forEach(button => {
-                button.addEventListener('click', function() {
-                    console.log('Delete button clicked');
-                });
-            });
-            
-            document.querySelectorAll('.btn-view').forEach(button => {
-                button.addEventListener('click', function() {
-                    console.log('View button clicked');
-                });
-            });
-        });
-    </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const percentageCells = document.querySelectorAll(".percentage-cell");
+      percentageCells.forEach((cell) => {
+        const percentage = parseInt(cell.textContent);
+        if (percentage >= 80) cell.classList.add("high");
+        else if (percentage >= 60) cell.classList.add("medium");
+        else cell.classList.add("low");
+      });
+    });
+  </script>
 </body>
 </html>
